@@ -9,7 +9,7 @@ import (
 type IdGenerator func() int
 
 func NewIdGen() IdGenerator {
-	ch := make(chan (int))
+	ch := make(chan int)
 	server := func() {
 		var counter int
 		for {
@@ -17,11 +17,12 @@ func NewIdGen() IdGenerator {
 			counter++
 		}
 	}
-	go server()
-
-	return func() int {
+	client := func() int {
 		return <-ch
 	}
+
+	go server()
+	return client
 }
 
 func main() {
