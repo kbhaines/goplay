@@ -1,10 +1,3 @@
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
 // Simple demo of interleaving reads and writes from channels. Shows that the
 // variable 'v' is not bound to the sending channel 'ch' until the channel is
 // ready for communication (i.e. the 'reader' reads). At that time the value
@@ -13,6 +6,13 @@ import (
 //
 // The 'blip' channel is sent to every 0.25s, the reader channel 'ch' is read
 // from every 1s, the net result is 'v' is incremented by 5 every 1s.
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
 
 func server(ch chan<- int, blip <-chan struct{}) {
 	v := 0
